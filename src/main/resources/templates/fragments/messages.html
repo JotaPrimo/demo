@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+<div class="alert alert-info alert-dismissible fade show"
+     th:fragment="messages" th:if="${mensagem}">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <span th:text="${mensagem}"></span>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show"
+     th:fragment="messages" th:if="${success}">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <span th:text="${success}"></span>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show"
+     th:fragment="messages" th:if="${error}">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <span th:text="${error}"></span>
+</div>
+
+</body>
+</html>
+
