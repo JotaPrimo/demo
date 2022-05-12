@@ -2,6 +2,7 @@ package com.example.crudjpa.demo.controllers;
 
 import com.example.crudjpa.demo.models.Professor;
 import com.example.crudjpa.demo.repositories.ProfessorRepository;
+import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,15 +37,13 @@ public class ProfessorController extends MyController {
     }
 
     @PostMapping("/store")
-    public String store(Model model, @Valid Professor professor, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
-       if(bindingResult.hasErrors()) {
-           redirectAttributes.addFlashAttribute(TITLE_ERROR, MSG_ERROR);
-           return "/auth/professores/create";
-       }
-
-       repository.save(professor);
-       redirectAttributes.addFlashAttribute(TITLE_SUCCESS, "Professor cadastro com sucesso");
-        return "redirect:/professores";
+    public String store(@Valid Professor professor, BindingResult result, RedirectAttributes redirectAttributes) {
+            if (result.hasErrors()) {
+                return "auth/professores/create";
+            }
+            repository.save(professor);
+            redirectAttributes.addFlashAttribute(TITLE_SUCCESS, "Professor cadastro com sucesso");
+            return "redirect:/professores";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,15 +60,17 @@ public class ProfessorController extends MyController {
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") Long id, @Valid Professor professor, BindingResult result, RedirectAttributes attributes){
-        if (result.hasErrors()) {
-            attributes.addFlashAttribute(TITLE_ERROR, MSG_ERROR);
-            professor.setId(id);
-            return "auth/professores/edit";
-        }
 
-        repository.save(professor);
-        attributes.addFlashAttribute(TITLE_SUCCESS, "Professor atualizado com sucesso");
-        return "redirect:/professores";
+            if (result.hasErrors()) {
+                professor.setId(id);
+                attributes.addFlashAttribute(TITLE_ERROR, MSG_ERROR);
+                return "auth/professores/edit";
+            }
+
+            repository.save(professor);
+            attributes.addFlashAttribute(TITLE_SUCCESS, "Professor atualizado com sucesso");
+            return "redirect:/professores";
+
     }
 
     @GetMapping("/delete/{id}")

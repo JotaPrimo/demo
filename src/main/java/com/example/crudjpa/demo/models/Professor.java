@@ -2,9 +2,12 @@ package com.example.crudjpa.demo.models;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -15,16 +18,24 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+
+    @NotEmpty(message = "A nome deve ser informada")
+    @Size(min = 3, message = "A nome deve ter no mínimo 3 caracteres")
     private String nome;
 
-    @NotNull
+
+    @NotNull(message = "A materia deve ser informada")
+    @NotEmpty(message = "A materia deve ser selecionada")
+    @Size(min = 4, message = "A materia deve ter no mínimo 4 caracteres")
     private String materia;
 
+    @NotBlank(message = "O CPF deve ser informado")
     @CPF(message = "CPF inválido")
     private  String cpf;
 
-    @NotNull
+
+    @NotEmpty(message = "Campo obrigatório")
+    @Size(min = 4, message = "A formacão deve ter no mínimo 4 caracteres")
     private String formacao;
 
     public Professor() {
