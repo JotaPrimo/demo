@@ -26,14 +26,14 @@
                 <div class="col-md-6 col-sm-12">
                     <label class="form-label">Nome</label>
                     <input type="text" class="form-control"  th:field="*{nome}">
-                    <div class="col-sm-5">
+                    <div class="col-md-6 col-sm-12">
                         <span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <label class="form-label">CPF</label>
-                    <input class="form-control" type="text" th:field="*{cpf}">
-                    <div class="col-sm-5">
+                    <input class="form-control" maxlength="11" type="text" th:field="*{cpf}">
+                    <div class="col-md-6 col-sm-12">
                         <span class="mensagem" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
                     </div>
                 </div>
@@ -41,12 +41,13 @@
                 <div class="col-md-6 col-sm-12">
                     <label class="form-label">Graduação</label>
                     <select class="form-select" th:field="*{formacao}">
+                        <option value=""> Selecione </option>
                         <option value="Graduação"> Graduação</option>
                         <option value="Pós-Graduação"> Pós-Graduação</option>
                         <option value="Mestrado"> Mestrado</option>
                         <option value="Doutorado"> Doutorado</option>
                     </select>
-                    <div class="col-sm-5">
+                    <div class="col-md-6 col-sm-12">
                         <span class="mensagem" th:if="${#fields.hasErrors('formacao')}" th:errors="*{formacao}"></span>
                     </div>
                 </div>
@@ -54,12 +55,13 @@
                 <div class="col-md-6 col-sm-12">
                     <label class="form-label">Materia</label>
                     <select required class="form-select" th:field="*{materia}">
+                        <option value=""> Selecione </option>
                         <option value="Matemática"> Matemática</option>
                         <option value="Fisíca"> Fisíca</option>
                         <option value="Quimica"> Quimica</option>
                         <option value="Lingua Portuguesa"> Lingua Portuguesa</option>
                     </select>
-                    <div class="col-sm-5">
+                    <div class="col-md-6 col-sm-12">
                         <span class="mensagem" th:if="${#fields.hasErrors('materia')}" th:errors="*{materia}"></span>
                     </div>
                 </div>
